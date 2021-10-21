@@ -1,0 +1,6 @@
+# default Eclipse build directories
+Debug
+Release
+
+#
+.*
