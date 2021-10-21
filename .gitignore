@@ -1,3 +1,6 @@
+# OS dependent
+.DS_Store
+
 # Eclipse
 .metadata
 
