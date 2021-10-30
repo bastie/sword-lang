@@ -2,16 +2,35 @@
 // SPDX-License-Identifier: MIT
 
 //============================================================================
-// Name        : forge.cpp
-// Author      : Sͬeͥbͭaͭsͤtͬian
-// Version     : 0.0.0
-// Description : The forge!
+// author      : Sͬeͥbͭaͭsͤtͬian
+// version     : 0.1.0
+// description : The forge!
 //============================================================================
 
-#include <iostream>
+#include "forge.h"
+#include "xIO.h" // x => eXtension
+#include "FFI.h" // FFI => BuildIn base
+
+using namespace forge;
 using namespace std;
 
 int main() {
-	cout << "This sword will cut." << endl;
+	std::cout << "This sword will cut." << std::endl;
+
+	Iron lexer;
+
+	std::wstring content = readFile("../Makefile");
+
+	Iron *iron = new Iron();
+	list<Ore> ores = iron->getIngredients (content);
+
+	syserrs (content);
+	system("sleep 5");
+	syserrs2(content);
 	return 0;
 }
+
+/*
+ * Der Iron Lexer erstellt aus der Ore Quelle die Token für den Blade Parser.
+ *
+ */
