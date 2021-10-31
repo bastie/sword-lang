@@ -8,12 +8,16 @@
 #ifndef FFI_H_
 #define FFI_H_
 
+#include <dlfcn.h>
+
 namespace forge {
 
 class FFI {
 public:
-	FFI();
+	FFI(char*);
 	virtual ~FFI();
+
+	virtual char* call (char*, char*);
 };
 
 } /* namespace forge */

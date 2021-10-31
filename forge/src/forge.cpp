@@ -24,9 +24,20 @@ int main() {
 	Iron *iron = new Iron();
 	list<Ore> ores = iron->getIngredients (content);
 
+	/*
 	syserrs (content);
-	system("sleep 5");
+	system("sleep 1");
 	syserrs2(content);
+	system("sleep 1");
+	*/
+
+	FFI *ffi = new FFI("/usr/lib/libSystem.B.dylib");
+	char* result = ffi->call("getenv","PATH");
+
+	std::cout << "PATH: " << result <<std::endl;
+
+	delete ffi;
+
 	return 0;
 }
 

@@ -8,6 +8,8 @@
 #ifndef XIO_H_
 #define XIO_H_
 
+#include <iostream>
+#include <string>
 
 std::wstring readFile(const char* filename);
 void syserr3 (wchar_t const &wc);

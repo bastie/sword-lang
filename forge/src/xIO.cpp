@@ -3,7 +3,7 @@
 
 /*
  *
- * author: Sͬeͥbͭaͭsͤtͬian
+ * Author: Sͬeͥbͭaͭsͤtͬian
  */
 
 #include <string>
@@ -33,11 +33,16 @@ void syserrs2 (std::wstring const &s) {
 
 
 
-std::wstring readFile(const char* filename)
+// https://cppcodetips.wordpress.com/2014/10/09/reading-and-writing-a-utf-8-file-in-c/
+std::wstring readFile(const char* filename) // https://www.it-swarm.com.de/de/c%2B%2B/lesen-sie-die-unicode-utf-8-datei-wstring/972052129/
 {
 	std::wifstream wif(filename);
-	wif.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>));
+	wif.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>)); // https://code-flow.club/253408/i-have-error-empty-is-not-a-member-of-std-locale
 	std::wstringstream wss;
 	wss << wif.rdbuf();
 	return wss.str();
 }
+
+/*
+ * https://www.heise.de/developer/artikel/volatile-und-andere-kleine-Verbesserungen-in-C-20-4874333.html
+ */
