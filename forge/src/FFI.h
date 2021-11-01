@@ -9,15 +9,22 @@
 #define FFI_H_
 
 #include <dlfcn.h>
+#include <string>
+#include "forge.h"
 
 namespace forge {
 
 class FFI {
 public:
 	FFI(char*);
+	FFI(std::string);
 	virtual ~FFI();
 
 	virtual char* call (char*, char*);
+	virtual char* call (std::string, std::string);
+
+private:
+	void loadLibrary(char*);
 };
 
 } /* namespace forge */

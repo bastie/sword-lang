@@ -15,6 +15,16 @@ namespace forge {
 	void* library;
 
 	FFI::FFI(char* libraryName) {
+		this->loadLibrary (libraryName);
+	}
+
+	FFI::FFI(std::string libraryName) {
+		char lName[libraryName.length()+1];
+		std::strncpy (lName,libraryName.c_str(),sizeof(lName));
+		this->loadLibrary(lName);
+	}
+
+	void FFI::loadLibrary (char* libraryName) {
 		dlerror(); // reset
 		library = dlopen(libraryName,RTLD_LAZY);;
 		if (NULL == library) {
@@ -23,7 +33,6 @@ namespace forge {
 				std::cerr << dlsym_error << std::endl;
 			}
 		}
-
 	}
 
 	FFI::~FFI() {
@@ -31,6 +40,15 @@ namespace forge {
 	}
 
 
+	char* FFI::call (std::string functionName, std::string functionParameter) {
+		char fName[functionName.length()+1];
+		std::strncpy(fName, functionName.c_str(), sizeof(fName));
+		char fParameter[functionParameter.length()+1];
+		std::strncpy(fParameter, functionParameter.c_str(), sizeof(fParameter));
+
+		char* result = this->call(fName, fParameter);
+		return result;
+	}
 
 	char* FFI::call (char* functionName, char* functionParameter) {
 		dlerror(); // reset
