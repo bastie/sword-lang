@@ -14,16 +14,53 @@
 
 namespace forge {
 
+/**
+ * Foreign function interface to call external methods.
+ *
+ * Example:
+ * <code>
+ * 	FFI *ffi = new FFI("/usr/lib/libSystem.B.dylib");
+ *	char* result = ffi->call("getenv","PATH");
+ *	std::cout << "PATH: " << result <<std::endl;
+ * </code>
+ *
+ * @brief foreign function interface
+ * @version 0.1.0
+ * @author Sͬeͥbͭaͭsͤtͬian
+ */
 class FFI {
 public:
-	FFI(char*);
-	FFI(std::string);
+	/**
+	 * Construct new instance and load library
+	 * @param libraryName qualified library name
+	 */
+	FFI(char* libraryName);
+	/**
+	 * Construct new instance and load library
+	 * @param libraryName qualified library name
+	 */
+	FFI(std::string libraryName);
+	/**
+	 * Destruct the instance and free the library
+	 */
 	virtual ~FFI();
 
-	virtual char* call (char*, char*);
-	virtual char* call (std::string, std::string);
+	/**
+	 * Call the function in the library
+	 * @param functionName name of function
+	 * @param functionParameter char* parameter
+	 * @return non-nullable char*
+	 */
+	virtual char* call (char* functionName, char* functionParameter);
+	/**
+	 * Adapter for char* call(char*,char*)
+	 * @param functionName name of function
+	 * @param functionParameter char* parameter
+	 * @return non-nullable char*
+	 */
+	virtual char* call (std::string functionName, std::string functionParameter);
 
-private:
+private: // internal methods
 	void loadLibrary(char*);
 };
 
